@@ -4,7 +4,7 @@
 Summary:	Apache module:
 Name:		apache-mod_%{mod_name}
 Version:	0.4.6
-Release:	3
+Release:	4
 License:	GPL
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/mod_auth_xradius-%{version}.tar.bz2
@@ -15,6 +15,7 @@ BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.2
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	apache(modules-api) = %apache_modules_api
+Requires:	apache-mod_auth_basic >= 2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_pkglibdir	%(%{apxs} -q LIBEXECDIR 2>/dev/null)

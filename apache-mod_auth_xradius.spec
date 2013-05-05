@@ -1,15 +1,16 @@
 #
 %define		mod_name	auth_xradius
-%define 	apxs		%{_sbindir}/apxs
+%define		apxs		%{_sbindir}/apxs
 Summary:	Apache module:
 Name:		apache-mod_%{mod_name}
 Version:	0.4.6
-Release:	4
+Release:	5
 License:	GPL
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/mod_auth_xradius-%{version}.tar.bz2
 # Source0-md5:	eeecc96f15dec9fe0a9c78c0b022903d
 Source1:	%{name}.conf
+Patch0:		mod_auth_xradius-unixd.patch
 URL:		http://www.outoforder.cc/projects/apache/mod_auth_xradius/
 BuildRequires:	%{apxs}
 BuildRequires:	apache-devel >= 2.2
@@ -34,6 +35,7 @@ mod_auth_xradius provides high performance authentication against RFC
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
+%patch0 -p1
 
 %build
 %configure

@@ -35,7 +35,7 @@ mod_auth_xradius provides high performance authentication against RFC
 
 %prep
 %setup -q -n mod_%{mod_name}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %configure

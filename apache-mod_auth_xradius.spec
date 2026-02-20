@@ -4,7 +4,7 @@
 Summary:	Apache module:
 Name:		apache-mod_%{mod_name}
 Version:	0.4.6
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/mod_auth_xradius-%{version}.tar.bz2

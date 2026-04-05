@@ -1,10 +1,10 @@
-#
+# DEAD upstream (site down), MD5 function declaration issues with current toolchain
 %define		mod_name	auth_xradius
 %define		apxs		%{_sbindir}/apxs
 Summary:	Apache module:
 Name:		apache-mod_%{mod_name}
 Version:	0.4.6
-Release:	6
+Release:	6.1
 License:	GPL
 Group:		Networking/Daemons/HTTP
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/mod_auth_xradius-%{version}.tar.bz2

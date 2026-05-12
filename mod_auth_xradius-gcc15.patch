@@ -1,0 +1,45 @@
+Fix build with GCC 15: move MD5 macro definitions before #include "md5.h",
+add extern to auth_xradius_module declaration in header to prevent
+multiple definition errors with modern linkers (GCC 10+ defaults to
+-fno-common), and fix format string: use %zu for apr_size_t (size_t).
+
+--- mod_auth_xradius-0.4.6.orig/libradius/porting.h	2005-04-11 23:42:47.000000000 +0200
++++ mod_auth_xradius-0.4.6/libradius/porting.h	2026-05-12 00:49:16.049904335 +0200
+@@ -15,12 +15,12 @@
+ 
+ #else
+ 
+-#include "md5.h"
+ #define MD5_DIGEST_LENGTH 16
+ #define MD5Final    xrad_MD5Final
+ #define MD5Init     xrad_MD5Init
+ #define MD5Pad      xrad_MD5Pad
+ #define MD5Update   xrad_MD5Update
++#include "md5.h"
+ 
+ #endif
+ 
+
+--- mod_auth_xradius-0.4.6.orig/include/mod_auth_xradius.h.in	2005-04-28 09:30:43.000000000 +0200
++++ mod_auth_xradius-0.4.6/include/mod_auth_xradius.h.in	2026-05-12 00:49:16.050008598 +0200
+@@ -41,7 +41,7 @@
+  */
+ #define HAVE_APR_MEMCACHE    @have_apr_memcache@
+ 
+-module AP_MODULE_DECLARE_DATA auth_xradius_module;
++extern module AP_MODULE_DECLARE_DATA auth_xradius_module;
+ 
+ #define MOD_AUTH_XRADIUS_VERSION "@MOD_AUTH_XRADIUS_VERSION@"
+ 
+
+--- mod_auth_xradius-0.4.6.orig/src/xradius_cache.c	2005-04-27 08:49:25.000000000 +0200
++++ mod_auth_xradius-0.4.6/src/xradius_cache.c	2026-05-12 00:49:16.050112417 +0200
+@@ -196,7 +196,7 @@
+     if (dbmval.dsize < (sizeof(apr_time_t)+sizeof(char)) || dbmval.dptr == NULL) {
+         ap_log_error(APLOG_MARK, APLOG_NOTICE, rv,
+                      r->server,
+-                     "xradius: val size: '%d'",
++                     "xradius: val size: '%zu'",
+                      dbmval.dsize);        
+         return DECLINED;
+     }
